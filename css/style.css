@@ -1,4 +1,12 @@
-body{    
-    background-image:url('../images/pitbull.png');
-    }
-   
+body {
+    background-image: url('../images/homepg.png'),url(https://wallpapercave.com/wp/wp10727343.jpg);
+    background-size:contain,cover; 
+    background-repeat: no-repeat,no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    overflow:hidden;
+}
