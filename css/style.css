@@ -28,6 +28,17 @@ body, html {
   position: fixed;
 }
 
+.makeup-bg {
+  background-image: url('../images/makeup-bg.jpg');
+  height: 100vh;
+  width: 100vw;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: fixed;
+  z-index: -1000;
+}
+
 /* Title Texts */
 #title-text {
   font-family: "Mystery Quest", system-ui, sans-serif;
@@ -373,6 +384,7 @@ body, html {
     transform: rotate(0deg);
   }
 }
+
 
 
 
