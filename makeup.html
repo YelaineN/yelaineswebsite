@@ -175,23 +175,25 @@
         </div>
         <button id="start-btn" onclick="start()">START</button>
         <button id="restart-btn" onclick="restart()" style="display:none;">RESTART</button>
-        <p id="timer" style="font-size: 24px; color: #ff4747; display:none;">Time left: 60s</p>
+        <p id="timer" style="font-size: 24px; font-weight:bold; color: #c63e67; display:none;">Timer: 60s</p>
         <div id="match-grid"></div>
         
-        <p id="tries-left" style="display:none;">Tries left: 5</p>
+        <!-- Updated tries left to 10 -->
+        <p id="tries-left" style="display:none;">Tries left: 10</p>
         
     </div>
 
     <script>
         var images = ["images/lipstick.png", "images/mascara.png", "images/concealer.png", "images/polish.png", "images/perfume.png", "images/palette.png", "images/eyelash-curler.png", "images/lashes.png", "images/primer.png"];
-        var totalTries = 5;
+        var totalTries = 10;  // Set total tries to 10
         var triesLeft = totalTries;
         var flippedCards = [];
         var matchedCards = 0;
         var gameStarted = false;
         var timer = 60;
         var timerInterval;
-
+        var isCardFlipping = false;  // Flag to track if cards are flipping
+    
         function shuffle(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -199,7 +201,7 @@
             }
             return array;
         }
-
+    
         function start() {
             if (gameStarted) return;
             gameStarted = true;
@@ -210,10 +212,10 @@
             triesLeft = totalTries;  
             matchedCards = 0;  
             updateTriesLeft();
-
+    
             // Hide the image container when the game starts
             document.querySelector('.image-container').style.display = 'none';
-
+    
             // Start the timer
             document.getElementById('timer').style.display = 'block';
             timer = 60;
@@ -227,57 +229,61 @@
                     document.getElementById('restart-btn').style.display = 'block';
                 }
             }, 1000);
-
+    
             const shuffledImages = shuffle([...images, ...images]); 
             const grid = document.getElementById('match-grid');
-
+    
             shuffledImages.forEach(function(image, index) {
                 const card = document.createElement('div');
                 card.classList.add('card');
                 card.dataset.image = image;
-
+    
                 const cardInner = document.createElement('div');
                 cardInner.classList.add('card_inner');
-
+    
                 const cardFront = document.createElement('div');
                 cardFront.classList.add('card_front');
-
+    
                 const cardBack = document.createElement('div');
                 cardBack.classList.add('card_back');
-
+    
                 const cardImg = document.createElement('img');
                 cardImg.src = image;
                 cardBack.appendChild(cardImg);
-
+    
                 cardInner.appendChild(cardFront);
                 cardInner.appendChild(cardBack);
                 card.appendChild(cardInner);
-
+    
                 card.addEventListener('click', function() {
-                    if (!card.classList.contains('is-flipped') && flippedCards.length < 2) {
-                        card.classList.add('is-flipped');
-                        flippedCards.push(card);
+                    // Prevent clicks if two cards are already flipped or if the card is already flipped
+                    if (isCardFlipping || card.classList.contains('is-flipped') || flippedCards.length === 2) {
+                        return;
                     }
-
+    
+                    card.classList.add('is-flipped');
+                    flippedCards.push(card);
+    
                     if (flippedCards.length === 2) {
+                        isCardFlipping = true;  // Prevent additional clicks
                         checkMatch();
                     }
                 });
-
+    
                 grid.appendChild(card);
             });
         }
-
+    
         function updateTimer() {
-            document.getElementById('timer').innerText = `Time left: ${timer}s`;
+            document.getElementById('timer').innerText = `Timer: ${timer}s`;
         }
-
+    
         function checkMatch() {
             const [card1, card2] = flippedCards;
             if (card1.dataset.image === card2.dataset.image) {
                 matchedCards++;
                 flippedCards = [];
-
+    
                 if (matchedCards === images.length) {
                     setTimeout(function() {
                         clearInterval(timerInterval);
@@ -285,16 +291,19 @@
                         document.getElementById('restart-btn').style.display = 'block';
                     }, 500);
                 }
+    
+                isCardFlipping = false;  // Re-enable clicks after a match
             } else {
                 triesLeft--;
                 updateTriesLeft();
-
+    
                 setTimeout(function() {
                     card1.classList.remove('is-flipped');
                     card2.classList.remove('is-flipped');
                     flippedCards = [];
+                    isCardFlipping = false;  // Re-enable clicks after flipping back
                 }, 1000);
-
+    
                 if (triesLeft === 0) {
                     setTimeout(function() {
                         clearInterval(timerInterval);
@@ -304,11 +313,11 @@
                 }
             }
         }
-
+    
         function updateTriesLeft() {
             document.getElementById('tries-left').innerText = `Tries left: ${triesLeft}`;
         }
-
+    
         function restart() {
             gameStarted = false;
             flippedCards = [];
@@ -319,10 +328,11 @@
             document.getElementById('match-grid').innerHTML = '';  
             document.getElementById('game-description').style.display = 'block'; // Show the paragraph again
             document.getElementById('timer').style.display = 'none';  // Hide timer
-
+    
             // Show the image container again after restarting
             document.querySelector('.image-container').style.display = 'flex';
         }
     </script>
+    
 </body>
 </html>
