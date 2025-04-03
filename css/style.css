@@ -56,6 +56,27 @@ body, html {
   transform: perspective(150px) rotateX(5deg) rotateY(5deg);
 }
 
+@media (max-width: 1200px) {
+  #title-text {
+    font-size: 80px;  /* Adjust for medium screens */
+    left: 5%;
+  }
+}
+
+@media (max-width: 768px) {
+  #title-text {
+    font-size: 60px;  /* Adjust for tablets */
+    left: 5%;
+  }
+}
+
+@media (max-width: 480px) {
+  #title-text {
+    font-size: 40px;  /* Adjust for mobile devices */
+    left: 3%;
+  }
+}
+
 #sub-text {
   font-family: "Mystery Quest", system-ui, sans-serif;
   font-size: 40px;
@@ -90,6 +111,20 @@ body, html {
   animation: pulse 4s ease-in-out infinite; 
 }
 
+/* Responsive Sound Button */
+@media (max-width: 768px) {
+  .sound-button {
+    font-size: 30px; /* Reduce icon size */
+    padding: 20px;  /* Adjust button padding */
+  }
+}
+
+@media (max-width: 480px) {
+  .sound-button {
+    font-size: 25px; /* Reduce icon size further */
+    padding: 15px; /* Adjust button padding */
+  }
+}
 
 .sound-button:hover {
   background: linear-gradient(145deg, rgb(190, 50, 80), rgb(160, 60, 84)); 
@@ -235,6 +270,34 @@ body, html {
   transform-style: preserve-3d;
   z-index: 1;
 }
+
+/* Responsive Navigation Button */
+@media (max-width: 768px) {
+  .nav-button {
+    font-size: 16px;  /* Reduced font size */
+    width: 50px;  /* Adjusted width */
+    height: 50px;  /* Adjusted height */
+    padding: 12px;  /* Adjusted padding */
+  }
+
+  .nav-button i {
+    font-size: 30px;  /* Reduced icon size */
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-button {
+    font-size: 14px;  /* Further reduced font size */
+    width: 45px;  /* Adjusted width */
+    height: 45px;  /* Adjusted height */
+    padding: 8px;  /* Adjusted padding */
+  }
+
+  .nav-button i {
+    font-size: 25px;  /* Further reduced icon size */
+  }
+}
+
 
 .nav-button i {
   font-size: 35px;
