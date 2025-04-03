@@ -72,6 +72,9 @@
         gap: 20px;
         margin-top: 20px;
         justify-items: center;
+        padding-left:50px;
+        padding-right: 50px;
+        padding-bottom: 55px; /* Add padding below the grid */
     }
 
     .card {
@@ -134,10 +137,11 @@
         background-color: #f8dc76;
     }
 
-    #tries-left {
-        font-size: 20px;
-        color: rgb(155, 34, 64);
-        margin-top: 20px;
+    #timer {
+        font-size: 24px;
+        font-weight: bold;
+        color: #c63e67;
+        display: none;
     }
 
     /* New div to hold the image */
@@ -175,18 +179,12 @@
         </div>
         <button id="start-btn" onclick="start()">START</button>
         <button id="restart-btn" onclick="restart()" style="display:none;">RESTART</button>
-        <p id="timer" style="font-size: 24px; font-weight:bold; color: #c63e67; display:none;">Timer: 60s</p>
+        <p id="timer">Timer: 60s</p>
         <div id="match-grid"></div>
-        
-        <!-- Updated tries left to 10 -->
-        <p id="tries-left" style="display:none;">Tries left: 10</p>
-        
     </div>
 
     <script>
         var images = ["images/lipstick.png", "images/mascara.png", "images/concealer.png", "images/polish.png", "images/perfume.png", "images/palette.png", "images/eyelash-curler.png", "images/lashes.png", "images/primer.png"];
-        var totalTries = 10;  // Set total tries to 10
-        var triesLeft = totalTries;
         var flippedCards = [];
         var matchedCards = 0;
         var gameStarted = false;
@@ -207,11 +205,8 @@
             gameStarted = true;
             document.getElementById('game-description').style.display = 'none';  // Hide the paragraph
             document.getElementById('start-btn').style.display = 'none';  
-            document.getElementById('tries-left').style.display = 'block';  
             document.getElementById('match-grid').innerHTML = '';  
-            triesLeft = totalTries;  
             matchedCards = 0;  
-            updateTriesLeft();
     
             // Hide the image container when the game starts
             document.querySelector('.image-container').style.display = 'none';
@@ -294,28 +289,13 @@
     
                 isCardFlipping = false;  // Re-enable clicks after a match
             } else {
-                triesLeft--;
-                updateTriesLeft();
-    
                 setTimeout(function() {
                     card1.classList.remove('is-flipped');
                     card2.classList.remove('is-flipped');
                     flippedCards = [];
                     isCardFlipping = false;  // Re-enable clicks after flipping back
                 }, 1000);
-    
-                if (triesLeft === 0) {
-                    setTimeout(function() {
-                        clearInterval(timerInterval);
-                        alert('Game over!');
-                        document.getElementById('restart-btn').style.display = 'block';
-                    }, 500);
-                }
             }
-        }
-    
-        function updateTriesLeft() {
-            document.getElementById('tries-left').innerText = `Tries left: ${triesLeft}`;
         }
     
         function restart() {
@@ -324,7 +304,6 @@
             matchedCards = 0;
             document.getElementById('restart-btn').style.display = 'none';  
             document.getElementById('start-btn').style.display = 'block';  
-            document.getElementById('tries-left').style.display = 'none';  
             document.getElementById('match-grid').innerHTML = '';  
             document.getElementById('game-description').style.display = 'block'; // Show the paragraph again
             document.getElementById('timer').style.display = 'none';  // Hide timer
