@@ -284,73 +284,74 @@ body, html {
 }
 
 
-/* Media Query for Larger Devices */
+/* Media Query for Larger Devices (Starting from 768px and above) */
 @media (min-width: 768px) {
   /* Title Size */
   #title-text {
-    font-size: 90px; /* Slightly smaller for larger screens */
+    font-size: 100px;  /* Use the exact font size as it appears on your local screen */
   }
 
   #sub-text {
-    font-size: 35px; /* Slightly smaller for larger screens */
+    font-size: 40px;  /* Match the exact size of the sub-text */
   }
 
   /* Sound Button Size */
   .sound-button {
-    font-size: 30px; /* Font size for icon */
-    padding: 20px; /* Padding for a more consistent size */
+    font-size: 40px;  /* Exact font size as seen on your local */
+    padding: 20px;  /* Ensure padding is the same */
   }
 
   .sound-button i {
-    font-size: 35px; /* Icon size */
+    font-size: 50px;  /* Adjust icon size as needed for exact match */
   }
 
   /* Navigation Button Size */
   .nav-button {
-    font-size: 16px; /* Same size */
-    width: 70px; /* Same size */
-    height: 70px; /* Same size */
-    padding: 10px; /* Same size */
+    font-size: 18px;  /* Exact font size for the navigation buttons */
+    width: 70px;      /* Exact button width */
+    height: 70px;     /* Exact button height */
+    padding: 15px;    /* Exact padding for the button */
   }
 
   .nav-button i {
-    font-size: 30px; /* Same icon size */
+    font-size: 35px;  /* Exact icon size for navigation buttons */
   }
 }
 
-/* Optional: Media Query for Very Large Devices (e.g., desktops) */
+/* Optional: For Very Large Devices (Desktops with very large screens) */
 @media (min-width: 1200px) {
   /* Title Size */
   #title-text {
-    font-size: 80px; /* Further smaller for very large screens */
+    font-size: 100px;  /* Keep the title size consistent with your local */
   }
 
   #sub-text {
-    font-size: 30px; /* Further smaller for very large screens */
+    font-size: 40px;  /* Keep the sub-text size consistent */
   }
 
   /* Sound Button Size */
   .sound-button {
-    font-size: 28px; /* Smaller */
-    padding: 18px; /* Smaller padding */
+    font-size: 40px;  /* Keep it the same size */
+    padding: 20px;  /* Padding to match */
   }
 
   .sound-button i {
-    font-size: 32px; /* Smaller icon */
+    font-size: 50px;  /* Same icon size */
   }
 
   /* Navigation Button Size */
   .nav-button {
-    font-size: 14px; /* Smaller font size */
-    width: 45px; /* Smaller button */
-    height: 45px; /* Smaller button */
-    padding: 8px; /* Smaller padding */
+    font-size: 18px;  /* Same font size */
+    width: 70px;      /* Same width */
+    height: 70px;     /* Same height */
+    padding: 15px;    /* Same padding */
   }
 
   .nav-button i {
-    font-size: 28px; /* Smaller icon */
+    font-size: 35px;  /* Same icon size */
   }
 }
+
 
 /* Bubble Styles */
 #home-bubble {
