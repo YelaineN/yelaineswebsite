@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DigiDiaries</title>
-<link rel="stylesheet" href="css/style.css"> <!-- Link to external CSS file -->
-<!-- FontAwesome link for icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Jersey+15&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Mystery+Quest&display=swap" rel="stylesheet">
-<script src="java/script.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DigiDiaries</title>
+    <link rel="stylesheet" href="css/style.css"> <!-- Link to external CSS file -->
+    <!-- FontAwesome link for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+15&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mystery+Quest&display=swap" rel="stylesheet">
+    <script src="java/script.js"></script>
 </head>
-
 
 <style>
     /* Ensure the body takes up the full height */
@@ -184,14 +183,21 @@
     </div>
 
     <script>
-        var images = ["images/lipstick.png", "images/mascara.png", "images/concealer.png", "images/polish.png", "images/perfume.png", "images/palette.png", "images/eyelash-curler.png", "images/lashes.png", "images/primer.png"];
-        var flippedCards = [];
-        var matchedCards = 0;
-        var gameStarted = false;
+        var tickSound = new Audio('audio/timer2.mp3');  // Audio for ticking
+        var timerSong = new Audio('audio/timer-song.mp3'); // Second audio for background sound
+        tickSound.volume = 0.3; // Lower the background music volume to 20%
+        timerSong.volume = 0.3; // Lower the background music volume to 20%
+
+
+        var gameStarted = false;  // Flag to check if the game has started
         var timer = 60;
         var timerInterval;
         var isCardFlipping = false;  // Flag to track if cards are flipping
-    
+        var flippedCards = [];
+        var matchedCards = 0;
+
+        var images = ["images/lipstick.png", "images/mascara.png", "images/concealer.png", "images/polish.png", "images/perfume.png", "images/palette.png", "images/eyelash-curler.png", "images/lashes.png", "images/primer.png"];
+
         function shuffle(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -199,86 +205,89 @@
             }
             return array;
         }
-    
+
         function start() {
             if (gameStarted) return;
             gameStarted = true;
-            document.getElementById('game-description').style.display = 'none';  // Hide the paragraph
+
+            // Hide description and start button, show grid and timer
+            document.getElementById('game-description').style.display = 'none';
             document.getElementById('start-btn').style.display = 'none';  
             document.getElementById('match-grid').innerHTML = '';  
-            matchedCards = 0;  
-    
-            // Hide the image container when the game starts
+            matchedCards = 0;
             document.querySelector('.image-container').style.display = 'none';
-    
-            // Start the timer
+
+            // Start the timer and both audio files
             document.getElementById('timer').style.display = 'block';
             timer = 60;
             updateTimer();
             timerInterval = setInterval(function() {
                 timer--;
                 updateTimer();
+                tickSound.play();  // Play the ticking sound every second
                 if (timer <= 0) {
                     clearInterval(timerInterval);
                     alert("Time's up! Game over!");
                     document.getElementById('restart-btn').style.display = 'block';
                 }
-            }, 1000);
-    
-            const shuffledImages = shuffle([...images, ...images]); 
+            }, 1000);  // Interval is 1000ms (1 second)
+
+            // Start background song at lower volume
+            timerSong.play();
+            
+            const shuffledImages = shuffle([...images, ...images]);
             const grid = document.getElementById('match-grid');
-    
-            shuffledImages.forEach(function(image, index) {
+
+            shuffledImages.forEach(function(image) {
                 const card = document.createElement('div');
                 card.classList.add('card');
                 card.dataset.image = image;
-    
+
                 const cardInner = document.createElement('div');
                 cardInner.classList.add('card_inner');
-    
+
                 const cardFront = document.createElement('div');
                 cardFront.classList.add('card_front');
-    
+
                 const cardBack = document.createElement('div');
                 cardBack.classList.add('card_back');
-    
+
                 const cardImg = document.createElement('img');
                 cardImg.src = image;
                 cardBack.appendChild(cardImg);
-    
+
                 cardInner.appendChild(cardFront);
                 cardInner.appendChild(cardBack);
                 card.appendChild(cardInner);
-    
+
                 card.addEventListener('click', function() {
-                    // Prevent clicks if two cards are already flipped or if the card is already flipped
                     if (isCardFlipping || card.classList.contains('is-flipped') || flippedCards.length === 2) {
                         return;
                     }
-    
+
                     card.classList.add('is-flipped');
                     flippedCards.push(card);
-    
+
                     if (flippedCards.length === 2) {
-                        isCardFlipping = true;  // Prevent additional clicks
+                        isCardFlipping = true;
                         checkMatch();
                     }
                 });
-    
+
                 grid.appendChild(card);
             });
         }
-    
+
         function updateTimer() {
             document.getElementById('timer').innerText = `Timer: ${timer}s`;
         }
-    
+
         function checkMatch() {
             const [card1, card2] = flippedCards;
             if (card1.dataset.image === card2.dataset.image) {
                 matchedCards++;
                 flippedCards = [];
-    
+
                 if (matchedCards === images.length) {
                     setTimeout(function() {
                         clearInterval(timerInterval);
@@ -286,18 +295,18 @@
                         document.getElementById('restart-btn').style.display = 'block';
                     }, 500);
                 }
-    
-                isCardFlipping = false;  // Re-enable clicks after a match
+
+                isCardFlipping = false;
             } else {
                 setTimeout(function() {
                     card1.classList.remove('is-flipped');
                     card2.classList.remove('is-flipped');
                     flippedCards = [];
-                    isCardFlipping = false;  // Re-enable clicks after flipping back
+                    isCardFlipping = false;
                 }, 1000);
             }
         }
-    
+
         function restart() {
             gameStarted = false;
             flippedCards = [];
@@ -305,13 +314,17 @@
             document.getElementById('restart-btn').style.display = 'none';  
             document.getElementById('start-btn').style.display = 'block';  
             document.getElementById('match-grid').innerHTML = '';  
-            document.getElementById('game-description').style.display = 'block'; // Show the paragraph again
-            document.getElementById('timer').style.display = 'none';  // Hide timer
-    
-            // Show the image container again after restarting
+            document.getElementById('game-description').style.display = 'block'; 
+            document.getElementById('timer').style.display = 'none';  
+
             document.querySelector('.image-container').style.display = 'flex';
+
+            // Stop the ticking sound and reset the audio
+            tickSound.pause();
+            tickSound.currentTime = 0;
+            timerSong.pause();
+            timerSong.currentTime = 0;
         }
     </script>
-    
 </body>
 </html>
