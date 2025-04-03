@@ -82,7 +82,7 @@ body, html {
   background: linear-gradient(145deg, rgb(239, 206, 107), rgb(241, 171, 39)); 
   border: none;
   color: white;
-  font-size: 40px; 
+  font-size: 20px; 
   padding: 25px;
   border-radius: 50%;
   box-shadow: 0 6px 12px rgba(156, 48, 89, 0.815); 
@@ -114,24 +114,6 @@ body, html {
   50% { transform: scale(1.1); }
 }
 
-/* Responsive Audio Button Adjustments */
-@media (max-width: 768px) {
-  .sound-button {
-    font-size: 35px !important;  /* Adjusted size for tablet */
-    padding: 20px !important;    /* Adjust padding for tablet */
-    width: 55px !important;      /* Adjust width */
-    height: 55px !important;     /* Adjust height */
-  }
-}
-
-@media (max-width: 480px) {
-  .sound-button {
-    font-size: 30px !important;  /* Adjusted size for mobile */
-    padding: 15px !important;    /* Adjust padding for mobile */
-    width: 50px !important;      /* Adjust width */
-    height: 50px !important;     /* Adjust height */
-  }
-}
 
 
 /* GIFS */
