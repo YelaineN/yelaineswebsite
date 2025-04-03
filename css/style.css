@@ -284,6 +284,73 @@ body, html {
 }
 
 
+@media (min-width: 768px) {
+  /* Title Size */
+  #title-text {
+    font-size: 100px; /* Keep the title size the same */
+  }
+
+  #sub-text {
+    font-size: 40px; /* Keep the subtitle size the same */
+  }
+
+  /* Sound Button Size */
+  .sound-button {
+    font-size: 40px; /* Keep the sound button size the same */
+    padding: 20px;
+  }
+
+  .sound-button i {
+    font-size: 50px; /* Keep the icon size the same */
+  }
+
+  /* Navigation Button Size */
+  .nav-button {
+    font-size: 18px; /* Keep nav button size the same */
+    width: 60px;
+    height: 60px;
+    padding: 15px;
+  }
+
+  .nav-button i {
+    font-size: 35px; /* Keep icon size the same */
+  }
+}
+
+/* Optional: Media Query for Extra Large Devices */
+@media (min-width: 1200px) {
+  /* Title Size */
+  #title-text {
+    font-size: 100px; /* Keep the title size the same */
+  }
+
+  #sub-text {
+    font-size: 40px; /* Keep the subtitle size the same */
+  }
+
+  /* Sound Button Size */
+  .sound-button {
+    font-size: 40px; /* Keep the sound button size the same */
+    padding: 20px;
+  }
+
+  .sound-button i {
+    font-size: 50px; /* Keep the icon size the same */
+  }
+
+  /* Navigation Button Size */
+  .nav-button {
+    font-size: 18px; /* Keep nav button size the same */
+    width: 60px;
+    height: 60px;
+    padding: 15px;
+  }
+
+  .nav-button i {
+    font-size: 35px; /* Keep icon size the same */
+  }
+}
+
 /* Bubble Styles */
 #home-bubble {
   width: 42vw;
