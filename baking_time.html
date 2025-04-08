@@ -510,6 +510,9 @@ function savePlayerName() {
       });
     });
 
+    const pickupSound = new Audio('audio/baking-pickup.mp3');
+  pickupSound.volume = 0.06;
+
     // Back button click sound and redirect
     document.getElementById('btn__back').addEventListener('click', () => {
       const sound = new Audio('audio/sparkly_click.wav');
@@ -636,9 +639,9 @@ document.getElementById('instruction-text').style.display = 'none';
 
 // New code: Define ingredient images and their properties
 const ingredients = [
-  { img: 'images/egg.png', width: 90, height: 80 },
+  { img: 'images/egg.png', width: 100, height: 90 },
   { img: 'images/strawberry.png', width: 90, height: 80 },
-  { img: 'images/flour.png', width: 150, height: 130 }
+  { img: 'images/flour.png', width: 110, height: 90 }
 ];
 
 // Function to spawn a new falling ingredient
@@ -706,8 +709,13 @@ function update() {
     ) {
       fallingIngredients.splice(i, 1);  // Remove the ingredient after catching
       applesCaught++;  // Increase score
+      pickupSound.currentTime = 0;
+    pickupSound.play();
       document.getElementById('apple-store').textContent = `Apples: ${applesCaught}`;
+      
+
     }
+    
   }
 
   document.getElementById('timer-fill').style.width = `${(timer / gameDuration) * 100}%`;
@@ -743,10 +751,6 @@ function draw() {
   const progress = (timer / gameDuration) * 100;
   timerFill.style.width = `${progress}%`;
 
-  if (timer === gameDuration) {
-    clearInterval(timerInterval);
-    alert(`Game over! You caught ${applesCaught} apples.`);
-  }
 }
 
 // Start game function to initiate game loop
