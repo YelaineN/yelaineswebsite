@@ -198,15 +198,13 @@ body, html {
 
 /* Hover Effect */
 .back-button:hover {
-  background: linear-gradient(145deg, rgb(190, 50, 80), rgb(160, 60, 84)); /* Reverse Gradient */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-  transform: translateY(-5px) rotateX(5deg) rotateY(5deg);
+  transform: scale(1.1);  /* Slightly enlarge the button on hover */
+  filter: drop-shadow(0 0 10px rgb(255, 255, 255));
+}
+.back-button:focus {
+  outline: none;
 }
 
-.back-button:hover i {
-  transform: scale(1.1);
-  text-shadow: 2px 2px 5px rgba(218, 109, 140, 0.732), 0 0 25px rgba(243, 231, 146, 0.8), 0 0 50px rgba(246, 229, 124, 0.6);
-}
 
 /* Button Container */
 .nav-container {
