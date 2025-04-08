@@ -47,7 +47,7 @@ body, html {
   color: rgb(250, 222, 127);
   text-align: left;
   position: absolute;
-  top: 0%;
+  top: -2%;
   left: 10%;
   pointer-events: none;
   user-select: none;
