@@ -178,7 +178,7 @@ body, html {
 
 /* Back Button */
 .back-button {
-  background-image: url('path-to-your-image.jpg'); /* Path to the image */
+  background-image: url('../images/back-btn2.png'); /* Path to the image */
   background-size: cover; /* Ensure the image covers the button */
   background-position: center; /* Center the image */
   border: none;
