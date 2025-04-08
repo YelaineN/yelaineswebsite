@@ -178,22 +178,23 @@ body, html {
 
 /* Back Button */
 .back-button {
-  background: linear-gradient(145deg, rgb(239, 206, 107), rgb(241, 171, 39)); /* Gradient background */
-  color: white;
-  font-size: 30px;
-  padding: 10px;
+  background-image: url('path-to-your-image.jpg'); /* Path to the image */
+  background-size: cover; /* Ensure the image covers the button */
+  background-position: center; /* Center the image */
   border: none;
-  border-radius: 50%;
-  box-shadow: 0 6px 12px rgba(156, 48, 89, 0.815); 
+  width: 60px; /* Set a fixed size for the button */
+  height: 60px; /* Set a fixed size for the button */
+  border-radius: 50%; /* Make it circular */
+  box-shadow: 0 6px 12px rgba(156, 48, 89, 0.815);
   transition: all 0.3s ease;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
-  top: 2%; 
-  left: 2%; 
+  position: fixed; /* Keeps it fixed in place */
+  top: 2%;
+  left: 2%;
   transform-style: preserve-3d;
-  z-index: 1000;
+  z-index: 1000; /* Ensure it's on top of other elements */
 }
 
 
