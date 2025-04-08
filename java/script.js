@@ -1,23 +1,29 @@
 
+
 document.addEventListener("DOMContentLoaded", function () {
-    var audio = document.getElementById("sound1");
-    var buttonSound = document.getElementById("buttonSound");
-  
-    // Toggle play/pause on button click
-    buttonSound.addEventListener("click", function () {
-      if (audio.paused) {
-        audio.play(); // Play audio
-        buttonSound.innerHTML = '<i class="fas fa-pause"></i>'; // Change icon to pause
-      } else {
-        audio.pause(); // Pause audio
-        buttonSound.innerHTML = '<i class="fas fa-music"></i>'; // Change icon to music
-      }
-    });
+  var audio = document.getElementById("sound1");
+  var buttonSound = document.getElementById("buttonSound");
+
+  // Set the volume to 20% (0.0 to 1.0 range)
+  audio.volume = 0.3; // Set volume to 20%
+
+  // Toggle play/pause on button click
+  buttonSound.addEventListener("click", function () {
+    if (audio.paused) {
+      audio.play(); // Play audio
+      buttonSound.innerHTML = '<i class="fas fa-pause"></i>'; // Change icon to pause
+    } else {
+      audio.pause(); // Pause audio
+      buttonSound.innerHTML = '<i class="fas fa-music"></i>'; // Change icon to music
+    }
   });
+});
   
   document.addEventListener("DOMContentLoaded", function () {
     var homeBubble = document.getElementById("home-bubble");  // Home bubble link
     var sound2 = document.getElementById("sound2");  // Sound element
+
+    sound2.volume = 0.2; // Set volume to 20%
 
     // Listen for clicks on the home bubble
     homeBubble.addEventListener("click", function (event) {
@@ -34,22 +40,22 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-    var backButton = document.getElementById("backButton");  // Back button element
-    var sound3 = document.getElementById("sound3");  // Sound element for the back button
+  var backButton = document.getElementById("backButton");
+  var sound3 = document.getElementById("sound3");
 
-    // Listen for clicks on the back button
-    backButton.addEventListener("click", function (event) {
-        event.preventDefault();  // Prevent immediate page transition
+  sound3.volume = 0.2; // Set volume to 20%
 
-        // Play the audio
-        sound3.play();
+  backButton.addEventListener("click", function (event) {
+      event.preventDefault();  // Prevent default navigation
+      sound3.play();  // Play the sound
 
-        // Delay the back navigation based on the audio duration
-        setTimeout(function () {
-            window.history.back();  // Go to the previous page
-        }, sound3.duration * 1000);  // Delay by the duration of the audio (in milliseconds)
-    });
+      // Delay the navigation by the duration of the audio
+      setTimeout(function () {
+          window.location.href = 'index.html';  // Redirect after sound
+      }, sound3.duration * 1000);  // Delay by the audio duration
+  });
 });
+
 
 document.addEventListener("DOMContentLoaded", function () {
   const startButton = document.getElementById("startButton");
