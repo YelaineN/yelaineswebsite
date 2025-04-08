@@ -132,7 +132,6 @@ body, html {
   transform: translate(-50%, -50%); 
   z-index: 10; 
   transition: transform 0.3s ease-in-out, opacity 0.3s ease;
-  box-shadow: 0 0 25px rgba(255, 135, 161, 0.865), 0 0 50px rgba(255, 186, 204, 0.998);
 }
 
 .gif-container:hover {
@@ -179,32 +178,36 @@ body, html {
 
 /* Back Button */
 .back-button {
-  position: absolute;
-  top: -5%; 
-  left: 0%; 
-  width: 250px;  /* Adjust the width */
-  height: 250px;
-  background: none;
-  padding: 0px;
+  background: linear-gradient(145deg, rgb(239, 206, 107), rgb(241, 171, 39)); /* Gradient background */
+  color: white;
+  font-size: 30px;
+  padding: 10px;
   border: none;
-  z-index: 10;  /* Ensure it stays on top */
-  -webkit-tap-highlight-color: transparent;
-  user-select: none;
-  background-image: url('../images/back-btn2.png');  /* Use the image for the back button */
-  background-size: cover;  /* Make sure the image covers the button */
-  background-position: center;  /* Centers the image inside the button */
+  border-radius: 50%;
+  box-shadow: 0 6px 12px rgba(156, 48, 89, 0.815); 
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 2%; 
+  left: 2%; 
+  transform-style: preserve-3d;
   z-index: 1000;
 }
 
 
+/* Hover Effect */
 .back-button:hover {
-  transform: scale(1.1);  /* Slightly enlarge the button on hover */
-  filter: drop-shadow(0 0 10px rgb(255, 255, 255));
-}
-.back-button:focus {
-  outline: none;
+  background: linear-gradient(145deg, rgb(190, 50, 80), rgb(160, 60, 84)); /* Reverse Gradient */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  transform: translateY(-5px) rotateX(5deg) rotateY(5deg);
 }
 
+.back-button:hover i {
+  transform: scale(1.1);
+  text-shadow: 2px 2px 5px rgba(218, 109, 140, 0.732), 0 0 25px rgba(243, 231, 146, 0.8), 0 0 50px rgba(246, 229, 124, 0.6);
+}
 
 /* Button Container */
 .nav-container {
@@ -224,8 +227,8 @@ body, html {
   color: white;
   font-size: 18px;
   text-decoration: none;
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -281,6 +284,73 @@ body, html {
 }
 
 
+/* Media Query for Larger Devices */
+@media (min-width: 768px) {
+  /* Title Size */
+  #title-text {
+    font-size: 90px; /* Slightly smaller for larger screens */
+  }
+
+  #sub-text {
+    font-size: 35px; /* Slightly smaller for larger screens */
+  }
+
+  /* Sound Button Size */
+  .sound-button {
+    font-size: 30px; /* Font size for icon */
+    padding: 20px; /* Padding for a more consistent size */
+  }
+
+  .sound-button i {
+    font-size: 35px; /* Icon size */
+  }
+
+  /* Navigation Button Size */
+  .nav-button {
+    font-size: 16px; /* Same size */
+    width: 70px; /* Same size */
+    height: 70px; /* Same size */
+    padding: 10px; /* Same size */
+  }
+
+  .nav-button i {
+    font-size: 30px; /* Same icon size */
+  }
+}
+
+/* Optional: Media Query for Very Large Devices (e.g., desktops) */
+@media (min-width: 1200px) {
+  /* Title Size */
+  #title-text {
+    font-size: 80px; /* Further smaller for very large screens */
+  }
+
+  #sub-text {
+    font-size: 30px; /* Further smaller for very large screens */
+  }
+
+  /* Sound Button Size */
+  .sound-button {
+    font-size: 28px; /* Smaller */
+    padding: 18px; /* Smaller padding */
+  }
+
+  .sound-button i {
+    font-size: 32px; /* Smaller icon */
+  }
+
+  /* Navigation Button Size */
+  .nav-button {
+    font-size: 14px; /* Smaller font size */
+    width: 45px; /* Smaller button */
+    height: 45px; /* Smaller button */
+    padding: 8px; /* Smaller padding */
+  }
+
+  .nav-button i {
+    font-size: 28px; /* Smaller icon */
+  }
+}
 
 /* Bubble Styles */
 #home-bubble {
