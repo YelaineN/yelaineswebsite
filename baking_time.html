@@ -161,7 +161,7 @@ text-shadow: -1px -1px 1px  rgb(250, 183, 198), 1px 1px 1px rgb(149, 36, 60);
   z-index: 10;
 }
 
-/* New Player Name Section */
+
 #player-name-section {
       position: absolute;
       top: 59%;
@@ -318,7 +318,7 @@ text-shadow: -1px -1px 1px  rgb(250, 183, 198), 1px 1px 1px rgb(149, 36, 60);
       display: none;
     }
 
-    /* Back Button */
+   
     #btn__back {
       position: absolute;
       top: -5%;
@@ -391,8 +391,8 @@ text-shadow: -1px -1px 1px  rgb(250, 183, 198), 1px 1px 1px rgb(149, 36, 60);
   padding: 10px;
   margin-top: 0;
   z-index: 10;
-  display: inline-block; /* Ensures the text stays on the same line */
-  white-space: nowrap; /* Prevents wrapping */
+  display: inline-block; 
+  white-space: nowrap; 
   filter: drop-shadow(0 0 10px rgb(255, 255, 255));
 }
 
@@ -401,11 +401,11 @@ text-shadow: -1px -1px 1px  rgb(250, 183, 198), 1px 1px 1px rgb(149, 36, 60);
     /* Go Button */
     #go-btn {
       position: absolute;
-      bottom: -13%;
+      bottom: 1%;
       left: 50%;
       transform: translateX(-50%); 
-      width: 250px;
-      height: 250px;
+      width: 133px;
+      height: 52px;
       border: none;
       padding: 0;
       background: transparent;
@@ -472,16 +472,16 @@ text-shadow: -1px -1px 1px  rgb(250, 183, 198), 1px 1px 1px rgb(149, 36, 60);
       <i id="music-icon"></i>
     </button> 
     <canvas id="gameCanvas" style="display: none;"></canvas>
-    <button id="go-btn"></button> <!-- Go Button -->
+    <button id="go-btn"></button> 
     
     
 
   <script>
 
-     // Global variable to store the player's name
+     // Store player's name
      let playerName = '';
 
-// Function to save player name and hide the input section once submitted
+
 function savePlayerName() {
   const input = document.getElementById('player-name');
   const nameExplain = document.querySelector('.name-explain');
@@ -489,16 +489,16 @@ function savePlayerName() {
   
   if (playerName === '') {
     nameExplain.textContent = "You need to enter a player name first!";
-    nameExplain.style.color = "red"; // To highlight the message in red for error
+    nameExplain.style.color = "red"; 
   } else {
     localStorage.setItem("playerName", playerName);
     nameExplain.textContent = "You succeeded!";
-    nameExplain.style.color = "#66a9b0"; // Change the color to indicate success
+    nameExplain.style.color = "#66a9b0"; 
   }
 }
 
 
-    // Audio element for hover sound
+    // Hover sound
     const hoverAudio = new Audio('audio/button-hover.mp3');
     hoverAudio.volume = 0.1;
   
@@ -513,7 +513,7 @@ function savePlayerName() {
     const pickupSound = new Audio('audio/baking-pickup.mp3');
   pickupSound.volume = 0.06;
 
-    // Back button click sound and redirect
+  
     document.getElementById('btn__back').addEventListener('click', () => {
       const sound = new Audio('audio/sparkly_click.wav');
       sound.volume = 0.2;
@@ -543,28 +543,28 @@ function savePlayerName() {
     player.imageLeft.src = 'images/zoey-left.png';
 
     const keys = { left: false, right: false };
-    let gameStarted = false;  // Track whether the game has started
-    let gameActive = false;   // Track if the game is active
-    let timerInterval;        // Timer for the game duration
+    let gameStarted = false;  
+    let gameActive = false;   
+    let timerInterval;        
     let applesCaught = 0;
     let timer = 0;
-    let gameDuration = 30;    // Set your game duration
+    let gameDuration = 30;    
 
-    // Show the instruction text and make sure it's visible
+    
 document.getElementById('instruction-text').style.display = 'none';
 
-    // Go button click event listener (Just transition to game screen, no start)
+    
     document.getElementById('go-btn').addEventListener('click', () => {
-  // Check if the player name is empty
+  
   if (playerName === '') {
-    // Display warning message if the player hasn't entered a name
+    
     const nameExplain = document.querySelector('.name-explain');
     nameExplain.textContent = "You need to enter a player name first!";
-    nameExplain.style.color = "red"; // Highlight the message in red
-    return; // Stop the rest of the code from executing
+    nameExplain.style.color = "red"; 
+    return; 
   }
 
-      document.querySelector('h1').style.display = 'none'; // Hides the <h1> header
+      document.querySelector('h1').style.display = 'none'; 
 
 
       canvas.style.display = 'block';
@@ -576,7 +576,7 @@ document.getElementById('instruction-text').style.display = 'none';
       document.getElementById('game-description').style.display = 'none';
       document.getElementById('player-name-section').style.display = 'none';
   
-      // Initialize the game elements (but don't start the game yet)
+      
       document.getElementById('apple-store').textContent = `Apples: ${applesCaught}`;
       document.getElementById('timer').style.display = 'block';
       document.getElementById('timer-image').style.display = 'block';
@@ -589,45 +589,45 @@ document.getElementById('instruction-text').style.display = 'none';
   }); 
 
 
-    // Listen for the keydown event to start the game
+    
     document.addEventListener('keydown', (e) => {
-      // Start the game when the left or right arrow key is pressed
+      
       if (!gameStarted && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) {
-        gameStarted = true;  // Mark the game as started
-        gameActive = true;   // Activate the game
+        gameStarted = true;  
+        gameActive = true;   
         applesCaught = 0;
         timer = 0;
 
-        // Hide instruction text after the game starts
+       
     document.getElementById('instruction-text').style.display = 'none';
 
     document.getElementById('key-buttons').style.display = 'none';
 
-        // Update UI
+       
         document.getElementById('apple-store').textContent = `Apples: ${applesCaught}`;
         
-        // Start the game timer
+        
         timerInterval = setInterval(() => {
           if (gameActive && timer < gameDuration) {
             timer++;
           }
         }, 1000);
         
-        // Start background music
+        
         const music = new Audio('audio/baking-game.mp3');
         music.loop = true;
         music.volume = 0.1;
-        music.play(); // Start background music when the game starts
+        music.play(); 
       }
 
-      // Handle player movement (left/right arrows) after game has started
+      
       if (gameStarted) {
         if (e.key === 'ArrowLeft') keys.left = true;
         if (e.key === 'ArrowRight') keys.right = true;
       }
     });
 
-    // Listen for keyup event to stop player movement
+    
     document.addEventListener('keyup', (e) => {
       if (gameStarted) {
         if (e.key === 'ArrowLeft') keys.left = false;
@@ -637,23 +637,23 @@ document.getElementById('instruction-text').style.display = 'none';
 
     const fruits = [];
 
-// New code: Define ingredient images and their properties
+
 const ingredients = [
   { img: 'images/egg.png', width: 100, height: 90 },
   { img: 'images/strawberry.png', width: 90, height: 80 },
   { img: 'images/flour.png', width: 110, height: 90 }
 ];
 
-// Function to spawn a new falling ingredient
+
 function spawnIngredient() {
   if (gameActive) {
     const ingredient = ingredients[Math.floor(Math.random() * ingredients.length)];
     const xPosition = Math.random() * (canvas.width - ingredient.width);
-    const speed = Math.random() * 3 + 2;  // Random speed between 2 and 5
+    const speed = Math.random() * 3 + 2;  
 
     fallingIngredients.push({
       x: xPosition,
-      y: -ingredient.height,  // Start just above the canvas
+      y: -ingredient.height,  
       img: new Image(),
       speed: speed,
       width: ingredient.width,
@@ -666,23 +666,23 @@ function spawnIngredient() {
 
 const fallingIngredients = [];
 
-// Function to update the falling ingredients
+
 function updateFallingIngredients() {
   for (let i = fallingIngredients.length - 1; i >= 0; i--) {
     const ingredient = fallingIngredients[i];
-    ingredient.y += ingredient.speed;  // Move down by speed
+    ingredient.y += ingredient.speed;  
 
-    // Draw the ingredient image
+    
     ctx.drawImage(ingredient.img, ingredient.x, ingredient.y, ingredient.width, ingredient.height);
 
-    // Remove ingredient if it goes out of the canvas
+    
     if (ingredient.y > canvas.height) {
       fallingIngredients.splice(i, 1);
     }
   }
 }
 
-// Function to update the game
+
 function update() {
   if (!gameActive) return;
 
@@ -698,7 +698,7 @@ function update() {
 
   player.x = Math.max(0, Math.min(canvas.width - player.width, player.x));
 
-  // Handle ingredient collisions and remove if necessary
+  
   for (let i = fallingIngredients.length - 1; i >= 0; i--) {
     const ingredient = fallingIngredients[i];
     if (
@@ -707,8 +707,8 @@ function update() {
       ingredient.y + ingredient.height > player.y &&
       ingredient.y < player.y + player.height
     ) {
-      fallingIngredients.splice(i, 1);  // Remove the ingredient after catching
-      applesCaught++;  // Increase score
+      fallingIngredients.splice(i, 1);  
+      applesCaught++;  
       pickupSound.currentTime = 0;
     pickupSound.play();
       document.getElementById('apple-store').textContent = `Apples: ${applesCaught}`;
@@ -727,9 +727,9 @@ function update() {
   }
 }
 
-// Draw function to render game elements
+
 function draw() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
+  ctx.clearRect(0, 0, canvas.width, canvas.height); 
 
   if (player.currentImage === 'right') {
     ctx.drawImage(player.imageRight, player.x, player.y, player.width, player.height);
@@ -737,7 +737,7 @@ function draw() {
     ctx.drawImage(player.imageLeft, player.x, player.y, player.width, player.height);
   }
 
-  updateFallingIngredients();  // Update the falling ingredients
+  updateFallingIngredients();  
   fruits.forEach(fruit => {
     ctx.beginPath();
     ctx.globalAlpha = fruit.opacity;
@@ -753,17 +753,17 @@ function draw() {
 
 }
 
-// Start game function to initiate game loop
+
 function startGame() {
   update();
   draw();
 }
 
 setInterval(() => {
-  spawnIngredient();  // Spawn a new ingredient every second
+  spawnIngredient();  
 }, 1000);
 
-setInterval(startGame, 16); // ~60 FPS
+setInterval(startGame, 16); 
 </script>
   
   
