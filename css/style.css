@@ -206,79 +206,6 @@ body, html {
 }
 
 
-/* Button Container */
-.nav-container {
-  position: fixed;
-  top: 35px;
-  right: 55px;
-  display: flex;
-  flex-direction: row;
-  gap: 45px;
-  z-index: 10;
-}
-
-/* Navigation Buttons */
-.nav-button {
-  background: linear-gradient(145deg, rgb(127, 197, 77), rgb(95, 126, 63));
-  border: none;
-  color: white;
-  font-size: 18px;
-  text-decoration: none;
-  width: 60px;
-  height: 60px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  padding: 15px;
-  border-radius: 50px;
-  box-shadow: 0 6px 12px rgba(156, 48, 89, 0.815);
-  transition: all 0.3s ease;
-  transform-style: preserve-3d;
-  z-index: 1;
-}
-
-.nav-button i {
-  font-size: 35px;
-}
-
-.nav-button::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 80%;
-  height: 80%;
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 50%;
-  box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.nav-button:hover {
-  background: linear-gradient(145deg, rgb(190, 50, 80), rgb(160, 60, 84));
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-  transform: translateY(-5px) rotateX(5deg) rotateY(5deg);
-}
-
-.nav-button:hover i {
-  text-shadow: 2px 2px 5px rgba(218, 109, 140, 0.732), 0 0 25px rgba(243, 231, 146, 0.8), 0 0 50px rgba(246, 229, 124, 0.6);
-}
-
-.nav-button:hover::after {
-  content: attr(data-title);
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%) scale(1.1);
-  font-size: 20px;
-  color: white;
-  margin-top: 8px;
-  text-align: center;
-  width: 100%;
-  text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
-  transform: translateX(-50%) scale(1.1) perspective(400px) rotateX(10deg) rotateY(10deg);
-}
 
 
 /* Media Query for Larger Devices */
@@ -336,18 +263,7 @@ body, html {
     font-size: 32px; /* Smaller icon */
   }
 
-  /* Navigation Button Size */
-  .nav-button {
-    font-size: 14px; /* Smaller font size */
-    width: 45px; /* Smaller button */
-    height: 45px; /* Smaller button */
-    padding: 8px; /* Smaller padding */
-  }
-
-  .nav-button i {
-    font-size: 28px; /* Smaller icon */
-  }
-}
+  
 
 /* Bubble Styles */
 #home-bubble {
