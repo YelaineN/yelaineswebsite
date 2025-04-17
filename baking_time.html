@@ -549,7 +549,8 @@ text-shadow: -1px -1px 1px  rgb(250, 183, 198), 1px 1px 1px rgb(149, 36, 60);
 
   <script>
 
-console.clear();
+
+
 
 
 
@@ -643,9 +644,7 @@ document.getElementById('instruction-text').style.display = 'none';
 
     
     document.getElementById('go-btn').addEventListener('click', () => {
-      const go = new Audio('audio/game-start.mp3');
-  go.volume = 0.2;
-  go.play();
+      
 
 
   if (playerName === '') {
@@ -837,7 +836,10 @@ function update() {
 } 
 
 
-function saveScore(name, score) {
+function saveScore() {
+  const name = localStorage.getItem("playerName") || playerName;  // Get player name
+  const score = applesCaught;
+
   const leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
 
   // Check if player already exists
@@ -861,27 +863,36 @@ function saveScore(name, score) {
 
 
 
+
 function showLeaderboard() {
   const leaderboardEl = document.getElementById("leaderboard");
   const scoreList    = document.getElementById("score-list");
 
+  // Retrieve the leaderboard from localStorage
   const players = JSON.parse(localStorage.getItem("leaderboard")) || [];
-  players.sort((a, b) => b.score - a.score);
+
+  // Filter out players with undefined or empty names
+  const validPlayers = players.filter(player => player.name && player.name.trim() !== '');
+
+  // Sort players by score in descending order
+  validPlayers.sort((a, b) => b.score - a.score);
 
   scoreList.innerHTML = ""; 
 
-  players.forEach(({ name, score }, idx) => {
+  // Display each valid player in the leaderboard
+  validPlayers.forEach(({ name, score }, idx) => {
     const li = document.createElement("li");
     if (idx === 0) {
-      li.innerHTML = `${idx+1}. <strong>${name}</strong>: ${score} pts <span class="star">⭐</span>`;
+      li.innerHTML = `${idx + 1}. <strong>${name}</strong>: ${score} pts <span class="star">⭐</span>`;
     } else {
-      li.textContent = `${idx+1}. ${name}: ${score} pts`;
+      li.textContent = `${idx + 1}. ${name}: ${score} pts`;
     }
     scoreList.appendChild(li);
   });
 
   leaderboardEl.style.display = "block";
 }
+
 
 
 
@@ -924,6 +935,8 @@ setInterval(() => {
 }, 1000);
 
 setInterval(startGame, 16); 
+
+
 
 
 
