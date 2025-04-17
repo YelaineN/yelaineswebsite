@@ -138,9 +138,14 @@ body, html {
   
 }
 
+
 .gif-container:hover {
   transform: scale(1) translate(-50%, -50%) rotateX(5deg) rotateY(5deg);
+ 
+  
 }
+
+
 
 .gif-container img {
   width: 100%;  /* Make the image cover the whole container */
@@ -151,14 +156,21 @@ body, html {
 
 .gif-container:hover img {
   transform: scale(1.1); /* Slight zoom effect on hover */
-}
+  
+  }
+
+  
+
 
 .gif-container .text {
   position: absolute;
   color: white;
   font-size: 40px;
   font-family: 'Gamja Flower', sans-serif;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+  text-shadow: 
+  -1px -1px 1px rgb(255, 157, 157),
+  1px 1px 1px rgb(195, 25, 84),
+  0 0 8px rgb(253, 10, 103);
   opacity: 0;
   transition: opacity 0.3s ease, transform 0.4s ease;
   transform: scale(0.8);
@@ -178,6 +190,7 @@ body, html {
   top: 68%;  
   left: 83%; 
 }
+
 
 /* Back Button */
 .back-button {
