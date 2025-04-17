@@ -428,6 +428,70 @@ text-shadow: -1px -1px 1px  rgb(250, 183, 198), 1px 1px 1px rgb(149, 36, 60);
     #go-btn:focus {
       outline: none;
     }
+
+    #leaderboard {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  background: #f8e661;
+  border: 5px solid #f1c40f;
+  border-radius: 20px;
+  padding: 20px;
+  z-index: 1000;
+  text-align: center;
+  font-family: 'Gamja Flower', sans-serif;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  max-height: 400px;           /* ← total box max */
+  overflow: hidden;           /* hide anything that overflows */
+}
+
+
+#leaderboard h2 {
+  margin-bottom: 15px;
+  font-size: 35px;
+  color: transparent;
+  background: linear-gradient(
+    to right,
+    rgb(246, 76, 113) 20%,
+    #ff97a0 50%,
+    rgb(246, 76, 113) 80%
+  );
+  background-size: 1000px 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: shimmer 2s infinite linear;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -500px 0;
+  }
+  100% {
+    background-position: 500px 0;
+  }
+}
+
+
+#score-list {
+  list-style: none;
+  padding: 0;
+  color: rgb(221, 68, 101);
+  max-height: 350px;          /* ← leave room for your title & padding */
+  overflow-y: auto;           /* ← vertical scroll when needed */
+  padding-right: 10px;        /* ← avoid scrollbar covering text */
+  margin: 0;  
+}
+
+#score-list li {
+  font-size: 24px;
+  padding: 8px;
+  border-bottom: 1px dashed #c49c08;
+}
+
+
+
   </style>
 </head>
 <body>
@@ -473,10 +537,21 @@ text-shadow: -1px -1px 1px  rgb(250, 183, 198), 1px 1px 1px rgb(149, 36, 60);
     </button> 
     <canvas id="gameCanvas" style="display: none;"></canvas>
     <button id="go-btn"></button> 
+
+    <div id="leaderboard" style="display: none;">
+      <h2>Leaderboard</h2>
+      <ul id="score-list">
+        <!-- Scores will be dynamically inserted here -->
+      </ul>
+    </div>
     
     
 
   <script>
+
+console.clear();
+
+
 
      // Store player's name
      let playerName = '';
@@ -496,6 +571,8 @@ function savePlayerName() {
     nameExplain.style.color = "#66a9b0"; 
   }
 }
+
+
 
 
     // Hover sound
@@ -522,6 +599,17 @@ function savePlayerName() {
         window.location.href = "secondpage.html";
       };
     });
+
+    const music = new Audio('audio/baking-game.mp3');
+music.loop = true;
+music.volume = 0.1;
+
+const yay = new Audio('audio/leaderboard.mp3');
+  yay.loop = false;      // only play once
+  yay.volume = 0.3;
+  
+
+
 
     const canvas = document.getElementById('gameCanvas');
     const ctx = canvas.getContext('2d');
@@ -555,7 +643,11 @@ document.getElementById('instruction-text').style.display = 'none';
 
     
     document.getElementById('go-btn').addEventListener('click', () => {
-  
+      const go = new Audio('audio/game-start.mp3');
+  go.volume = 0.2;
+  go.play();
+
+
   if (playerName === '') {
     
     const nameExplain = document.querySelector('.name-explain');
@@ -577,7 +669,7 @@ document.getElementById('instruction-text').style.display = 'none';
       document.getElementById('player-name-section').style.display = 'none';
   
       
-      document.getElementById('apple-store').textContent = `Apples: ${applesCaught}`;
+      document.getElementById('apple-store').textContent = `Ingredients: ${applesCaught}`;
       document.getElementById('timer').style.display = 'block';
       document.getElementById('timer-image').style.display = 'block';
       document.getElementById('apple-store').style.display = 'block';
@@ -604,7 +696,7 @@ document.getElementById('instruction-text').style.display = 'none';
     document.getElementById('key-buttons').style.display = 'none';
 
        
-        document.getElementById('apple-store').textContent = `Apples: ${applesCaught}`;
+        document.getElementById('apple-store').textContent = `Ingredients: ${applesCaught}`;
         
         
         timerInterval = setInterval(() => {
@@ -614,11 +706,23 @@ document.getElementById('instruction-text').style.display = 'none';
         }, 1000);
         
         
-        const music = new Audio('audio/baking-game.mp3');
-        music.loop = true;
-        music.volume = 0.1;
-        music.play(); 
+
+        music.play();
+
       }
+
+      
+
+      const musicButton = document.getElementById('music-button');
+musicButton.addEventListener('click', function(e) {
+  e.stopPropagation();
+  if (music.paused) {
+    music.play();
+  } else {
+    music.pause();
+  }
+});
+
 
       
       if (gameStarted) {
@@ -711,7 +815,7 @@ function update() {
       applesCaught++;  
       pickupSound.currentTime = 0;
     pickupSound.play();
-      document.getElementById('apple-store').textContent = `Apples: ${applesCaught}`;
+      document.getElementById('apple-store').textContent = `Ingredients: ${applesCaught}`;
       
 
     }
@@ -721,11 +825,67 @@ function update() {
   document.getElementById('timer-fill').style.width = `${(timer / gameDuration) * 100}%`;
 
   if (timer >= gameDuration) {
-    gameActive = false;
-    clearInterval(timerInterval);
-    alert(`Time's up! 🍎 You caught ${applesCaught} apples!`);
+  gameActive = false;
+  clearInterval(timerInterval);
+  alert(`Time's up! 🍎 You caught ${applesCaught} ingredients!`);
+
+  saveScore();           // ← make sure this runs
+  showLeaderboard();     // ← then read + display
+  music.pause();
+  yay.play();
   }
+} 
+
+
+function saveScore(name, score) {
+  const leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
+
+  // Check if player already exists
+  const existingPlayer = leaderboard.find(player => player.name === name);
+
+  if (existingPlayer) {
+    // Only update score if it's higher
+    if (score > existingPlayer.score) {
+      existingPlayer.score = score;
+    }
+  } else {
+    // Add new player
+    leaderboard.push({ name, score });
+  }
+
+  // Save back to localStorage
+  localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
 }
+
+
+
+
+
+function showLeaderboard() {
+  const leaderboardEl = document.getElementById("leaderboard");
+  const scoreList    = document.getElementById("score-list");
+
+  const players = JSON.parse(localStorage.getItem("leaderboard")) || [];
+  players.sort((a, b) => b.score - a.score);
+
+  scoreList.innerHTML = ""; 
+
+  players.forEach(({ name, score }, idx) => {
+    const li = document.createElement("li");
+    if (idx === 0) {
+      li.innerHTML = `${idx+1}. <strong>${name}</strong>: ${score} pts <span class="star">⭐</span>`;
+    } else {
+      li.textContent = `${idx+1}. ${name}: ${score} pts`;
+    }
+    scoreList.appendChild(li);
+  });
+
+  leaderboardEl.style.display = "block";
+}
+
+
+
+
 
 
 function draw() {
@@ -764,6 +924,10 @@ setInterval(() => {
 }, 1000);
 
 setInterval(startGame, 16); 
+
+
+
+
 </script>
   
   
