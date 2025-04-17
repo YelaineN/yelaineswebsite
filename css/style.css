@@ -47,7 +47,7 @@ body, html {
   color: rgb(250, 222, 127);
   text-align: left;
   position: absolute;
-  top: -2%;
+  top: 0%; /* Adjusted for better positioning */
   left: 10%;
   pointer-events: none;
   user-select: none;
@@ -55,7 +55,6 @@ body, html {
   z-index: 1;
   transform: perspective(150px) rotateX(5deg) rotateY(5deg);
 }
-
 
 
 #sub-text {
@@ -77,21 +76,19 @@ body, html {
 /* Sound buttons */
 .sound-button {
   position: absolute;
-  top: 65.5%;
-  left: 10.2%;
+  top: 65%;
+  left: 10%;
   background: linear-gradient(145deg, rgb(239, 206, 107), rgb(241, 171, 39)); 
   border: none;
   color: white;
   font-size: 40px; 
-  padding: 25px;
+  padding: 20px; /* Adjusted padding */
   border-radius: 50%;
   box-shadow: 0 6px 12px rgba(156, 48, 89, 0.815); 
   transition: all 0.3s ease;
   transform-style: preserve-3d;
   z-index: 1000; 
-  animation: pulse 4s ease-in-out infinite; 
 }
-
 
 .sound-button:hover {
   background: linear-gradient(145deg, rgb(190, 50, 80), rgb(160, 60, 84)); 
@@ -118,11 +115,13 @@ body, html {
 
 
 /* GIFS */
+
+
 .gif-container {
   width: 350px; 
   height: 350px;
-  border-radius: 50%; 
-  overflow: hidden; 
+  border-radius: 50%; /* Circular border */
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -132,11 +131,18 @@ body, html {
   transform: translate(-50%, -50%); 
   z-index: 10; 
   transition: transform 0.3s ease-in-out, opacity 0.3s ease;
+  box-shadow: 0 0 25px rgba(255, 135, 161, 0.865), 0 0 50px rgba(229, 120, 149, 0.998);
+
+  /* Add a polka-dot border */
+  border: 10px solid transparent; /* Space for the border */
+  
 }
 
+
 .gif-container:hover {
-  transform: scale(1.03) translate(-50%, -50%) rotateX(5deg) rotateY(5deg);
-  opacity: 0.9;
+  transform: scale(1) translate(-50%, -50%) rotateX(5deg) rotateY(5deg);
+ 
+  
 }
 
 .gif-container img {
@@ -153,8 +159,8 @@ body, html {
 .gif-container .text {
   position: absolute;
   color: white;
-  font-size: 24px;
-  font-family: "Jersey 15", sans-serif;
+  font-size: 40px;
+  font-family: 'Gamja Flower', sans-serif;
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
   opacity: 0;
   transition: opacity 0.3s ease, transform 0.4s ease;
@@ -196,7 +202,6 @@ body, html {
 }
 
 
-/* Hover Effect */
 .back-button:hover {
   transform: scale(1.1);  /* Slightly enlarge the button on hover */
   filter: drop-shadow(0 0 10px rgb(255, 255, 255));
@@ -206,148 +211,9 @@ body, html {
 }
 
 
-/* Button Container */
-.nav-container {
-  position: fixed;
-  top: 35px;
-  right: 55px;
-  display: flex;
-  flex-direction: row;
-  gap: 45px;
-  z-index: 10;
-}
-
-/* Navigation Buttons */
-.nav-button {
-  background: linear-gradient(145deg, rgb(127, 197, 77), rgb(95, 126, 63));
-  border: none;
-  color: white;
-  font-size: 18px;
-  text-decoration: none;
-  width: 60px;
-  height: 60px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  padding: 15px;
-  border-radius: 50px;
-  box-shadow: 0 6px 12px rgba(156, 48, 89, 0.815);
-  transition: all 0.3s ease;
-  transform-style: preserve-3d;
-  z-index: 1;
-}
-
-.nav-button i {
-  font-size: 35px;
-}
-
-.nav-button::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 80%;
-  height: 80%;
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 50%;
-  box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.nav-button:hover {
-  background: linear-gradient(145deg, rgb(190, 50, 80), rgb(160, 60, 84));
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-  transform: translateY(-5px) rotateX(5deg) rotateY(5deg);
-}
-
-.nav-button:hover i {
-  text-shadow: 2px 2px 5px rgba(218, 109, 140, 0.732), 0 0 25px rgba(243, 231, 146, 0.8), 0 0 50px rgba(246, 229, 124, 0.6);
-}
-
-.nav-button:hover::after {
-  content: attr(data-title);
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%) scale(1.1);
-  font-size: 20px;
-  color: white;
-  margin-top: 8px;
-  text-align: center;
-  width: 100%;
-  text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
-  transform: translateX(-50%) scale(1.1) perspective(400px) rotateX(10deg) rotateY(10deg);
-}
 
 
-/* Media Query for Larger Devices */
-@media (min-width: 768px) {
-  /* Title Size */
-  #title-text {
-    font-size: 90px; /* Slightly smaller for larger screens */
-  }
 
-  #sub-text {
-    font-size: 35px; /* Slightly smaller for larger screens */
-  }
-
-  /* Sound Button Size */
-  .sound-button {
-    font-size: 30px; /* Font size for icon */
-    padding: 20px; /* Padding for a more consistent size */
-  }
-
-  .sound-button i {
-    font-size: 35px; /* Icon size */
-  }
-
-  /* Navigation Button Size */
-  .nav-button {
-    font-size: 16px; /* Same size */
-    width: 70px; /* Same size */
-    height: 70px; /* Same size */
-    padding: 10px; /* Same size */
-  }
-
-  .nav-button i {
-    font-size: 30px; /* Same icon size */
-  }
-}
-
-/* Optional: Media Query for Very Large Devices (e.g., desktops) */
-@media (min-width: 1200px) {
-  /* Title Size */
-  #title-text {
-    font-size: 80px; /* Further smaller for very large screens */
-  }
-
-  #sub-text {
-    font-size: 30px; /* Further smaller for very large screens */
-  }
-
-  /* Sound Button Size */
-  .sound-button {
-    font-size: 28px; /* Smaller */
-    padding: 18px; /* Smaller padding */
-  }
-
-  .sound-button i {
-    font-size: 32px; /* Smaller icon */
-  }
-
-  /* Navigation Button Size */
-  .nav-button {
-    font-size: 14px; /* Smaller font size */
-    width: 45px; /* Smaller button */
-    height: 45px; /* Smaller button */
-    padding: 8px; /* Smaller padding */
-  }
-
-  .nav-button i {
-    font-size: 28px; /* Smaller icon */
-  }
-}
 
 /* Bubble Styles */
 #home-bubble {
