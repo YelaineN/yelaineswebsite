@@ -298,22 +298,25 @@
       filter: drop-shadow(0 0 10px rgb(255, 255, 255));
     }
     #cleanser-btn {
-      all: unset;
-      position: absolute;
-      top: 21%;
-      left: 67.8%;
-      width: 110px;
-      height: 110px;
-      cursor: pointer;
-      z-index: 10;
-      user-select: none;
-      background-image: url('images/cleanser-btn.png');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      -webkit-tap-highlight-color: transparent;
-      display: none;
+  all: unset;
+  position: absolute;
+  top: 21%;
+  left: 67.48%;
+  width: 110px;
+  height: 110px;
+  display: block;           
+  box-sizing: border-box;   
+  cursor: pointer;
+  z-index: 10;
+  user-select: none;
+  background-image: url('images/cleanser-btn.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  -webkit-tap-highlight-color: transparent;
     }
+
+
     #cleanser-btn:hover {
       transform: scale(1.1);
       filter: drop-shadow(0 0 10px rgb(255, 255, 255));
@@ -328,10 +331,12 @@
       all: unset;
       position: absolute;
       top: 36%;
-      left: 67.8%;
+      left: 67.48%;
       width: 110px;
       height: 110px;
       cursor: pointer;
+      display: block;           
+      box-sizing: border-box;  
       z-index: 10;
       user-select: none;
       background-image: url('images/sponge-btn.png');
@@ -339,7 +344,7 @@
       background-position: center;
       background-repeat: no-repeat;
       -webkit-tap-highlight-color: transparent;
-      display: none;
+      
     }
     #sponge-btn:hover {
       transform: scale(1.1);
@@ -355,18 +360,20 @@
       all: unset;
       position: absolute;
       top: 51%;
-      left: 67.8%;
+      left: 67.48%;
       width: 110px;
       height: 110px;
       cursor: pointer;
       z-index: 10;
+      display: block;           
+    box-sizing: border-box;  
       user-select: none;
       background-image: url('images/face-mask-btn.png');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
       -webkit-tap-highlight-color: transparent;
-      display: none;
+      
     }
     #face-mask-btn:hover {
       transform: scale(1.1);
@@ -382,10 +389,12 @@
       all: unset;
       position: absolute;
       top: 66%;
-      left: 67.8%;
+      left: 67.48%;
       width: 110px;
       height: 110px;
       cursor: pointer;
+      display: block;           
+      box-sizing: border-box;  
       z-index: 10;
       user-select: none;
       background-image: url('images/cream-btn.png');
@@ -393,7 +402,7 @@
       background-position: center;
       background-repeat: no-repeat;
       -webkit-tap-highlight-color: transparent;
-      display: none;
+  
     }
     #cream-btn:hover {
       transform: scale(1.1);
@@ -467,6 +476,13 @@
       });
     });
 
+
+    document.getElementById('cleanser-btn').style.display = 'none';
+      document.getElementById('sponge-btn').style.display = 'none';
+      document.getElementById('face-mask-btn').style.display = 'none';
+      document.getElementById('cream-btn').style.display = 'none';
+
+
     // Go button click event
     document.getElementById('go-btn').addEventListener('click', () => {
       document.getElementById('border-image').style.display = 'none';
@@ -477,6 +493,9 @@
       document.getElementById('spa-bubbles').style.display = 'none';
       document.getElementById('spa-items').style.display = 'none';
       document.getElementById('go-btn').style.display = 'none';
+
+
+      
 
       document.getElementById('spa-game-border').style.display = 'block';
       document.getElementById('music-button').style.display = 'block';
